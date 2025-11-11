@@ -1,0 +1,70 @@
+{
+  "name": "ai-doc-generator",
+  "displayName": "AI Documentation Generator",
+  "description": "Generate XML documentation summaries using OpenAI ChatGPT",
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:ai-doc-generator.generateSummary"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "ai-doc-generator.generateSummary",
+        "title": "Generate AI Documentation"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "ai-doc-generator.generateSummary",
+        "key": "ctrl+shift+d",
+        "mac": "cmd+shift+d",
+        "when": "editorTextFocus"
+      }
+    ],
+    "configuration": {
+      "title": "AI Documentation Generator",
+      "properties": {
+        "aiDocGenerator.openaiApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "OpenAI API Key for ChatGPT"
+        },
+        "aiDocGenerator.model": {
+          "type": "string",
+          "default": "gpt-3.5-turbo",
+          "enum": [
+            "gpt-3.5-turbo",
+            "gpt-4",
+            "gpt-4-turbo"
+          ],
+          "description": "OpenAI model to use"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.75.0",
+    "@types/node": "16.x",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0",
+    "eslint": "^8.28.0",
+    "typescript": "^4.9.3"
+  },
+  "dependencies": {
+    "openai": "^4.20.0"
+  }
+}
